@@ -1,0 +1,334 @@
+/*
+ *
+ * CSS written based on SMACSS architecture.
+ * To learn more, visit: http://smacss.com/
+ * 
+ * For simplicity, no reset or normalize is added. 
+ * To learn more, visit: https://css-tricks.com/reboot-resets-reasoning/
+ *
+*/
+
+/* ---- Base Rules ---- */
+body {
+  /* background: rgb(136, 203, 171);
+  background: linear-gradient(0deg, rgba(136, 203, 171, 1) 0%, rgba(0, 13, 60, 1) 100%);
+  margin: 0;
+  font-family: "Merriweather", serif;
+  color: #fff; */
+  background-image: url(../images/body-bg.jpg);
+  background-attachment: fixed;
+  background-size: cover;
+  overflow-x: hidden;
+}
+
+/* Typeography General*/
+h1 {
+  font-family: "Fira Sans", sans-serif;
+  font-size: 3em;
+}
+
+@media only screen and (min-width: 35em) {
+  h1 {
+    font-size: 7em;
+    /* margin: 2em 4rem 1em;*/
+  }
+}
+
+h2 {
+  border-bottom: 1px solid #cc1;
+  font-family: "Oxygen", Sans-Serif;
+  font-size: 3em;
+  color: #fff;
+}
+
+p {
+  line-height: 1.6em;
+  color: #eee;
+}
+
+/* ---- Layout Rules ---- */
+main {
+  margin: 10vh 1em 10vh;
+}
+
+.main-hero {
+  min-height: 40vh;
+  padding-top: 3em;
+}
+
+section {
+  position: relative;
+  min-height: 80vh;
+}
+
+/* ---- Module Rules ---- */
+
+/* Navigation Styles*/
+.navbar__menu ul {
+  padding-left: 0;
+  margin: 0;
+  text-align: right;
+}
+
+.navbar__menu li {
+  display: inline-block;
+  color: #000;
+  margin-left: 2em;
+  margin-right: 2em;
+}
+
+.navbar__menu .menu__link {
+  display: block;
+  padding: 1em;
+  font-weight: bold;
+  text-decoration: none;
+  color: #000;
+}
+
+.navbar__menu .menu__link:hover {
+  background: #333;
+  color: #fff;
+  transition: ease 0.3s all;
+}
+
+/* Header Styles */
+.page__header {
+  /* background: #fff;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 5;
+  height: 2em;
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center; */
+  top: 0;
+  width: 100%;
+  height: 4rem;
+  background-color: rgba(24, 24, 24, 0.7);
+  position: fixed;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 12;
+}
+
+/* Footer Styles */
+.page__footer {
+  background: #000;
+  padding: 3em;
+  color: #fff;
+}
+
+.page__footer p {
+  color: #fff;
+}
+
+/* ---- Theme Rules ---- */
+/* Landing Container Styles */
+.landing__container {
+  padding: 1em;
+  text-align: left;
+}
+
+@media only screen and (min-width: 35em) {
+  .landing__container {
+    max-width: 50em;
+    padding: 4em;
+  }
+}
+
+section:nth-of-type(even) .landing__container {
+  margin-right: 0;
+  margin-left: auto;
+  text-align: right;
+}
+
+/* Background Circles */
+/* Note that background circles are created with psuedo elements before and after */
+/* Circles appear to be random do to use of :nth-of-type psuedo class */
+section:nth-of-type(odd) .landing__container::before {
+  content: "";
+  background: rgba(255, 255, 255, 0.187);
+  position: absolute;
+  z-index: -5;
+  width: 20vh;
+  height: 20vh;
+  border-radius: 50%;
+  opacity: 0;
+  transition: ease 0.5s all;
+}
+
+section:nth-of-type(even) .landing__container::before {
+  content: "";
+  background: rgb(255, 255, 255);
+  background: linear-gradient(0deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.2) 100%);
+  position: absolute;
+  top: 3em;
+  right: 3em;
+  z-index: -5;
+  width: 10vh;
+  height: 10vh;
+  border-radius: 50%;
+  opacity: 0;
+  transition: ease 0.5s all;
+}
+
+section:nth-of-type(3n) .landing__container::after {
+  content: "";
+  background: rgb(255, 255, 255);
+  background: linear-gradient(0deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.2) 100%);
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  z-index: -5;
+  width: 10vh;
+  height: 10vh;
+  border-radius: 50%;
+  opacity: 0;
+  transition: ease 0.5s all;
+}
+
+section:nth-of-type(3n + 1) .landing__container::after {
+  content: "";
+  background: rgb(255, 255, 255);
+  background: linear-gradient(0deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.2) 100%);
+  position: absolute;
+  right: 20vw;
+  bottom: -5em;
+  z-index: -5;
+  width: 15vh;
+  height: 15vh;
+  border-radius: 50%;
+  opacity: 0;
+  transition: ease 0.5s all;
+}
+
+/* ---- Theme State Rules ---- */
+/* Section Active Styles */
+/* Note: your-active-class class is applied through javascript. You should update the class here and in the index.html to what you set in your javascript file.  */
+section.your-active-class {
+  background: rgb(0, 0, 0);
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0) 100%);
+}
+
+section.your-active-class .landing__container::before {
+  opacity: 1;
+  animation: rotate 4s linear 0s infinite forwards;
+}
+
+section.your-active-class .landing__container::after {
+  opacity: 1;
+  animation: rotate 5s linear 0s infinite forwards reverse;
+}
+
+/*added styles */
+.navbar__item {
+  text-decoration: none;
+  color: #ffffff;
+}
+.active {
+  color: #cdaa7c;
+}
+
+.main__hero {
+  color: #cdaa7c;
+  margin-top: 17rem;
+}
+.footer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  background-image: url("../images/footer-bg.jpg");
+  background-attachment: fixed;
+  background-size: cover;
+  width: 100%;
+  height: 60rem;
+}
+.footer .footer-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  padding-top: 3rem;
+}
+.footer .footer-content .footer-h2 {
+  font-family: "Allura";
+  font-size: 5rem;
+  line-height: 1;
+  color: #cdaa7c;
+}
+.footer .footer-content .footer-h1 {
+  font-size: 5rem;
+  color: #ffffff;
+  text-transform: uppercase;
+}
+.footer .footer-content .footer-p {
+  color: #ffffff;
+  text-align: center;
+}
+.footer .footer-content .email {
+  height: 4rem;
+  border: 2px solid #ffffff;
+  background: none;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 1.5rem;
+  padding: 0 7rem 0 1.5rem;
+  width: 60rem;
+  display: flex;
+  flex-wrap: wrap;
+}
+.footer .footer-content .copy-rights {
+  color: #ffffff;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+.footer .footer-content .copy-rights .dev-name {
+  color: #cdaa7c;
+}
+.social-media-icons {
+  width: 21.6rem;
+  display: inline-block;
+  z-index: 1;
+}
+.social-media-icons a {
+  padding: 10px;
+  display: inline-block;
+  font-size: 2.5rem;
+  color: rgba(255, 255, 255, 0.5);
+}
+.social-media-icons a:hover {
+  color: #cdaa7c;
+}
+
+.social-media-icons-borders {
+  width: 25rem;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  z-index: 1;
+}
+.social-media-icons-borders a {
+  padding: 1.5rem;
+  margin: 1rem;
+  display: inline-block;
+  font-size: 1.5rem;
+  color: rgba(255, 255, 255, 0.5);
+  border: 0.5px solid rgba(255, 255, 255, 0.5);
+  border-radius: 45%;
+  transition: 0.5s ease;
+  transition-property: border-color, background;
+}
+.social-media-icons-borders a:hover {
+  background-color: #cdaa7c;
+}
+
+/* Section Active Styles Keyframe Animations */
+@keyframes rotate {
+  from {
+    transform: rotate(0deg) translate(-1em) rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg) translate(-1em) rotate(-360deg);
+  }
+}
